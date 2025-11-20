@@ -131,7 +131,7 @@
       <sourceProduct refid="GoldsteinPhaseFiltering"/>
     </sources>
     <parameters class="com.bc.ceres.binding.dom.XppDomElement">
-      <sourceBands/>
+      <sourceBands>Phase_ifg_VH_21Oct2025_09Oct2025,coh_IW1_VH_21Oct2025_09Oct2025,Phase_ifg_VV_21Oct2025_09Oct2025</sourceBands>
       <nRgLooks>6</nRgLooks>
       <nAzLooks>2</nAzLooks>
       <outputIntensity>false</outputIntensity>
@@ -173,7 +173,7 @@
       <sourceProduct refid="Multilook"/>
     </sources>
     <parameters class="com.bc.ceres.binding.dom.XppDomElement">
-      <sourceBands/>
+      <sourceBands>Phase_ifg_VH_21Oct2025_09Oct2025,coh_IW1_VH_21Oct2025_09Oct2025,Phase_ifg_VV_21Oct2025_09Oct2025</sourceBands>
       <demName>SRTM 3Sec</demName>
       <externalDEMFile/>
       <externalDEMNoDataValue>0.0</externalDEMNoDataValue>
