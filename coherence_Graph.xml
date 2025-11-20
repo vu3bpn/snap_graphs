@@ -1,0 +1,94 @@
+<graph id="Graph">
+  <version>1.0</version>
+  <node id="Read">
+    <operator>Read</operator>
+    <sources/>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <useAdvancedOptions>false</useAdvancedOptions>
+      <file>/mnt/nvme1n1/Bipin/data/Sentinel/S1A_IW_GRDH_1SDV_20250506T001936_20250506T002001_059066_0753C9_E6F9.SAFE.zip</file>
+      <copyMetadata>true</copyMetadata>
+      <bandNames/>
+      <pixelRegion>0,0,25548,16739</pixelRegion>
+      <maskNames/>
+    </parameters>
+  </node>
+  <node id="Read(2)">
+    <operator>Read</operator>
+    <sources/>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <useAdvancedOptions>false</useAdvancedOptions>
+      <file>/mnt/nvme1n1/Bipin/data/Sentinel/S1A_IW_GRDH_1SDV_20250530T001935_20250530T002000_059416_07600B_301C.SAFE.zip</file>
+      <copyMetadata>true</copyMetadata>
+      <bandNames/>
+      <pixelRegion>0,0,25548,16739</pixelRegion>
+      <maskNames/>
+    </parameters>
+  </node>
+  <node id="DEM-Assisted-Coregistration">
+    <operator>DEM-Assisted-Coregistration</operator>
+    <sources>
+      <sourceProduct refid="Read(2)"/>
+      <sourceProduct.1 refid="Read"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <demName>SRTM 3Sec</demName>
+      <demResamplingMethod>BICUBIC_INTERPOLATION</demResamplingMethod>
+      <externalDEMFile/>
+      <externalDEMNoDataValue>0.0</externalDEMNoDataValue>
+      <resamplingType>BISINC_5_POINT_INTERPOLATION</resamplingType>
+      <tileExtensionPercent>50</tileExtensionPercent>
+      <maskOutAreaWithoutElevation>true</maskOutAreaWithoutElevation>
+      <outputRangeAzimuthOffset>false</outputRangeAzimuthOffset>
+    </parameters>
+  </node>
+  <node id="Coherence">
+    <operator>Coherence</operator>
+    <sources>
+      <sourceProduct refid="DEM-Assisted-Coregistration"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <cohWinAz>10</cohWinAz>
+      <cohWinRg>10</cohWinRg>
+      <subtractFlatEarthPhase>false</subtractFlatEarthPhase>
+      <srpPolynomialDegree>5</srpPolynomialDegree>
+      <srpNumberPoints>501</srpNumberPoints>
+      <orbitDegree>3</orbitDegree>
+      <squarePixel>true</squarePixel>
+      <subtractTopographicPhase>false</subtractTopographicPhase>
+      <demName>SRTM 3Sec</demName>
+      <externalDEMFile/>
+      <externalDEMNoDataValue>0.0</externalDEMNoDataValue>
+      <externalDEMApplyEGM>true</externalDEMApplyEGM>
+      <tileExtensionPercent>100</tileExtensionPercent>
+      <singleMaster>true</singleMaster>
+    </parameters>
+  </node>
+  <node id="Write">
+    <operator>Write</operator>
+    <sources>
+      <sourceProduct refid="Coherence"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <file>/mnt/nvme1n1/Bipin/data/Geotiff/Sar_wnwrap/S1A_IW_GRDH_1SDV_20250530T001935_20250530T002000_059416_07600B_301C_Stack_Coh.tif</file>
+      <formatName>GeoTIFF-BigTIFF</formatName>
+    </parameters>
+  </node>
+  <applicationData id="Presentation">
+    <Description/>
+    <node id="Read">
+            <displayPosition x="37.0" y="69.0"/>
+    </node>
+    <node id="Read(2)">
+      <displayPosition x="41.0" y="151.0"/>
+    </node>
+    <node id="DEM-Assisted-Coregistration">
+      <displayPosition x="155.0" y="109.0"/>
+    </node>
+    <node id="Coherence">
+      <displayPosition x="411.0" y="106.0"/>
+    </node>
+    <node id="Write">
+            <displayPosition x="551.0" y="108.0"/>
+    </node>
+  </applicationData>
+</graph>
